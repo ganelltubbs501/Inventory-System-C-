@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Copy, Terminal, Play, FileText, AlertTriangle } from 'lucide-react';
+import { Copy, Terminal, Play, FileText, AlertTriangle, Download } from 'lucide-react';
+import { generateAndDownloadSolution } from '../services/solutionGenerator';
 
 interface SimulatedItem {
   sku: string;
@@ -263,12 +264,20 @@ namespace InventoryApp
               <Terminal size={18} className="text-slate-600" />
               C# Solution Code
             </h2>
-            <button 
-              onClick={() => navigator.clipboard.writeText(csharpCode)}
-              className="text-xs flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-medium"
-            >
-              <Copy size={14} /> Copy
-            </button>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => generateAndDownloadSolution(csharpCode, 'Milestone3')}
+                className="text-xs flex items-center gap-1 text-green-600 hover:text-green-800 font-medium px-2 py-1 bg-green-50 rounded"
+              >
+                <Download size={14} /> Download .sln
+              </button>
+              <button 
+                onClick={() => navigator.clipboard.writeText(csharpCode)}
+                className="text-xs flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-medium px-2 py-1 bg-indigo-50 rounded"
+              >
+                <Copy size={14} /> Copy Code
+              </button>
+            </div>
           </div>
           
           <div className="flex-1 bg-slate-900 overflow-auto">
